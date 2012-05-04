@@ -74,6 +74,7 @@ set directory=~/.vim_runtime,.,/tmp
 " under the Edit menu of gvim
 set foldmethod=marker
 set commentstring=\ \ #%s
+set cursorline " Syntax hilighting on cursor line
 set ignorecase
 set linebreak
 set expandtab
@@ -127,7 +128,7 @@ endif
 
 " make sure colored syntax mode is on
 if has("terminfo")
-  set t_Co=8
+  set t_Co=16
   set t_Sf=[3%p1%dm
   set t_Sb=[4%p1%dm
 else
@@ -147,6 +148,11 @@ hi Comment term=italic ctermfg=cyan guifg=#80A0FF gui=bold
 
 " Increase contrast on special character. They're usually bad!
 hi SpecialKey term=bold ctermbg=red ctermfg=white guibg=#FF0000 guifg=#000000 gui=bold
+
+" Syntax highlighting for the cursor line
+hi clear CursorLine " Remove default underline style
+" Black is perfect on the #181818 background of Mac Terminal :)
+hi CursorLine term=NONE ctermbg=black guibg=#FFFFFF
 
 " Keyboard mapping for cursor keys
 " [works for XTerminals - 970818]
