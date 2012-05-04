@@ -79,10 +79,10 @@ set linebreak
 set expandtab
 set autoindent
 set copyindent
-set smartindent
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+" set smartindent " deprecated http://vim.wikia.com/wiki/VimTip644
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set shiftround
 set formatoptions=tcqn1
 set backspace=2
@@ -95,8 +95,10 @@ set scroll=4
 set infercase
 set ruler
 set nohlsearch
-set modelines=5
-set listchars=eol:$,tab:\|\ 
+set modelines=2
+"set listchars=eol:$,tab:\|\ ,trail:·
+set listchars=tab:\|\ ,trail:·
+set list
 
 " hide certain files in the file explorer
 let g:explHideFiles='\.class$,\.swp$'
@@ -123,11 +125,6 @@ if has("gui_running")
     set guicursor+=a:blinkon0
 endif
 
-" ccs printing options
-set printoptions=paper:letter,syntax:n,duplex:off
-set printdevice=rockwell
-"set printfont=
-
 " make sure colored syntax mode is on
 if has("terminfo")
   set t_Co=8
@@ -146,7 +143,10 @@ au BufRead,BufNewFile *.scala,*.java,*.c,*.m set number
 
 " Change the global default comment colors
 " They needs more contrast with white-on-black
-hi Comment term=italic ctermfg=cyan guifg=#80a0FF gui=bold
+hi Comment term=italic ctermfg=cyan guifg=#80A0FF gui=bold
+
+" Increase contrast on special character. They're usually bad!
+hi SpecialKey term=bold ctermbg=red ctermfg=white guibg=#FF0000 guifg=#000000 gui=bold
 
 " Keyboard mapping for cursor keys
 " [works for XTerminals - 970818]
