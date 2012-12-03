@@ -1,7 +1,13 @@
 " Adam's vimrc File
-" 
+"
 " $Id: vimrc 31 2006-02-28 23:18:13Z adkap $
 "
+
+" here's my modeline
+" vim:set ts=2 sw=2 sts=0 expandtab:
+
+" Enable Pathogen modules
+call pathogen#infect()
 
 " keymappings
 map \1 <Esc>:set guifont=-*-tixus-*-*-*-*-*-*-*-*-*-*<CR>
@@ -25,12 +31,15 @@ map \p <Esc>:prev<CR>
 "map \s reserved for vimspell
 map \T <Esc>:set tabstop=8<CR>:set shiftwidth=8<CR>
 map \t <Esc>:set tabstop=4<CR>:set shiftwidth=4<CR>
-map \u <Esc>:hi LineNr term=bold ctermfg=black guifg=grey<CR>:set number!<CR>:set number?<CR>
+"map \u <Esc>:hi LineNr term=bold ctermfg=black guifg=grey<CR>:set number!<CR>:set number?<CR>
+map \u <Esc>:set number!<CR>:set number?<CR>
 
 map \w <Esc>:set wrap!<CR>:set wrap?<CR>
 map \x <Esc>:set expandtab!<CR>:set expandtab?<CR>
 map \] <Esc>:execute ToggleComment()<CR>
 map <S-CR> O<Esc>
+map <F2> :.w !pbcopy<CR><CR>
+map <F3> :r !pbpaste<CR>
 
 vmap \q :!perl -MText::Autoformat -e autoformat<CR>
 
@@ -79,6 +88,7 @@ set ignorecase
 set linebreak
 set expandtab
 set autoindent
+set clipboard=unnamed
 set copyindent
 " set smartindent " deprecated http://vim.wikia.com/wiki/VimTip644
 set tabstop=2
@@ -108,14 +118,14 @@ let g:explHideFiles='\.class$,\.swp$'
 " is a complete pain in the ass if i mistype
 map Q <silent>
 map q: <silent>
-map K <silent>
 map q <silent>
+map K <silent>
 
 " i always, ALWAYS hit ":W" instead of ":w"
 command Q q
 command W w
 
-" quick timestamp-as-comment command 
+" quick timestamp-as-comment command
 command DS r!echo -n "\# " ; date
 
 " turn off hilighting for CDATA
@@ -127,24 +137,27 @@ if has("gui_running")
 endif
 
 " make sure colored syntax mode is on
-if has("terminfo")
-  set t_Co=16
-  set t_Sf=[3%p1%dm
-  set t_Sb=[4%p1%dm
-else
-  set t_Co=8
-  set t_Sf=[3%dm
-  set t_Sb=[4%dm
-endif
+"if has("terminfo")
+"  set t_Co=256
+"  set t_Sf=[3%p1%dm
+"  set t_Sb=[4%p1%dm
+"else
+"  set t_Co=8
+"  set t_Sf=[3%dm
+"  set t_Sb=[4%dm
+"endif
 syntax on
-colorscheme default
+let g:solarized_termcolors = &t_Co
+let g:solarized_termtrans = 1
+set background=dark
+colorscheme solarized
 
 " Turn numbers on for some file types
 au BufRead,BufNewFile *.scala,*.java,*.c,*.m set number
 
 " Change the global default comment colors
 " They needs more contrast with white-on-black
-hi Comment term=italic ctermfg=cyan guifg=#80A0FF gui=bold
+"hi Comment term=italic ctermfg=cyan guifg=#80A0FF gui=bold
 
 " Increase contrast on special character. They're usually bad!
 hi SpecialKey term=bold ctermbg=red ctermfg=white guibg=#FF0000 guifg=#000000 gui=bold
@@ -164,6 +177,3 @@ imap <ESC>[A <Up>
 imap <ESC>[B <Down>
 imap <ESC>[C <Right>
 imap <ESC>[D <Left>
-
-" here's my modeline
-" vim:set ts=2 sw=2 sts=0 noexpandtab:
