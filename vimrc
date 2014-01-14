@@ -15,6 +15,7 @@ map \2 <Esc>:set guifont=-*-bright-*-*-*-*-*-*-*-*-*-*<CR>
 map \3 <Esc>:set guifont=Bitstream\ Vera\ Sans\ Mono\ 9<CR>
 map \4 <Esc>:set guifont=bright\ Medium\ 12<CR>
 map \5 <Esc>:set guifont=tixus\ Medium\ 12<CR>
+map \c <Esc>:hi CursorLine term=NONE ctermbg=lightgray<CR>
 map \E <Esc>:w<CR>:e#<CR>
 map \e <Esc>:e#<CR>
 map \g gqap
@@ -28,20 +29,18 @@ map \n <Esc>:next<CR>
 map \o <Esc>:set paste!<CR>:set paste?<CR>
 map \P <Esc>:prev!<CR>
 map \p <Esc>:prev<CR>
+nmap \q :nohlsearch<CR>
 "map \s reserved for vimspell
 map \T <Esc>:set tabstop=8<CR>:set shiftwidth=8<CR>
 map \t <Esc>:set tabstop=4<CR>:set shiftwidth=4<CR>
 "map \u <Esc>:hi LineNr term=bold ctermfg=black guifg=grey<CR>:set number!<CR>:set number?<CR>
 map \u <Esc>:set number!<CR>:set number?<CR>
-
 map \w <Esc>:set wrap!<CR>:set wrap?<CR>
 map \x <Esc>:set expandtab!<CR>:set expandtab?<CR>
 map \] <Esc>:execute ToggleComment()<CR>
 map <S-CR> O<Esc>
 map <F2> :.w !pbcopy<CR><CR>
 map <F3> :r !pbpaste<CR>
-
-vmap \q :!perl -MText::Autoformat -e autoformat<CR>
 
 " (ab)breviations in (i)nsert mode
 iab uw; use warnings;<CR>use strict;<CR>
@@ -81,16 +80,20 @@ set directory=~/.vim_runtime,.,/tmp
 
 " other options, look them up yourself (no offense) or see `Settings Window'
 " under the Edit menu of gvim
+set winheight=10
+set winminheight=5
+
+set winwidth=999
+set winminwidth=70
+
 set foldmethod=marker
 set commentstring=\ \ #%s
 set cursorline " Syntax hilighting on cursor line
-set ignorecase
 set linebreak
 set expandtab
 set autoindent
 set clipboard=unnamed
 set copyindent
-" set smartindent " deprecated http://vim.wikia.com/wiki/VimTip644
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
@@ -110,6 +113,10 @@ set modelines=2
 "set listchars=eol:$,tab:\|\ ,trail:·
 set listchars=tab:\|\ ,trail:·
 set list
+set incsearch       " incremental search
+set ignorecase      " case insensitive search by defaul
+set smartcase       " case sensitive search if there is any captial
+set hlsearch        " highlight search matches
 
 " hide certain files in the file explorer
 let g:explHideFiles='\.class$,\.swp$'
@@ -146,9 +153,11 @@ endif
 "  set t_Sf=[3%dm
 "  set t_Sb=[4%dm
 "endif
+
 syntax on
 let g:solarized_termcolors = &t_Co
 let g:solarized_termtrans = 1
+let g:solarized_hitrail = 1
 set background=dark
 colorscheme solarized
 
@@ -157,10 +166,10 @@ au BufRead,BufNewFile *.scala,*.java,*.c,*.m set number
 
 " Change the global default comment colors
 " They needs more contrast with white-on-black
-"hi Comment term=italic ctermfg=cyan guifg=#80A0FF gui=bold
+hi Comment term=italic ctermfg=cyan guifg=#80A0FF gui=bold
 
 " Increase contrast on special character. They're usually bad!
-hi SpecialKey term=bold ctermbg=red ctermfg=white guibg=#FF0000 guifg=#000000 gui=bold
+"hi SpecialKey term=bold ctermbg=red ctermfg=white guibg=#FF0000 guifg=#000000 gui=bold
 
 " Syntax highlighting for the cursor line
 hi clear CursorLine " Remove default underline style
