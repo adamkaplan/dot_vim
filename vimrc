@@ -1,10 +1,4 @@
 " Adam's vimrc File
-"
-" $Id: vimrc 31 2006-02-28 23:18:13Z adkap $
-"
-
-" here's my modeline
-" vim:set ts=2 sw=2 sts=0 expandtab:
 
 " Enable Pathogen modules
 call pathogen#infect()
@@ -15,7 +9,6 @@ map \2 <Esc>:set guifont=-*-bright-*-*-*-*-*-*-*-*-*-*<CR>
 map \3 <Esc>:set guifont=Bitstream\ Vera\ Sans\ Mono\ 9<CR>
 map \4 <Esc>:set guifont=bright\ Medium\ 12<CR>
 map \5 <Esc>:set guifont=tixus\ Medium\ 12<CR>
-map \c <Esc>:hi CursorLine term=NONE ctermbg=lightgray<CR>
 map \E <Esc>:w<CR>:e#<CR>
 map \e <Esc>:e#<CR>
 map \g gqap
@@ -42,14 +35,8 @@ map <S-CR> O<Esc>
 map <F2> :.w !pbcopy<CR><CR>
 map <F3> :r !pbpaste<CR>
 
-" (ab)breviations in (i)nsert mode
-iab uw; use warnings;<CR>use strict;<CR>
-
 " for any plugins that use this, make their keymappings use comma
 let mapleader=","
-
-" formats POD past __END__ in perl
-let perl_include_pod=1
 
 " turn off linewise keys -- normally, the `j' and `k' keys move the cursor down
 " one entire line. with line wrapping on, this can cause the cursor to actually
@@ -109,7 +96,7 @@ set scroll=4
 set infercase
 set ruler
 set nohlsearch
-set modelines=2
+"set modelines=2 - security concern
 "set listchars=eol:$,tab:\|\ ,trail:·
 set listchars=tab:\|\ ,trail:·
 set list
@@ -120,6 +107,9 @@ set hlsearch        " highlight search matches
 
 " hide certain files in the file explorer
 let g:explHideFiles='\.class$,\.swp$'
+
+" NERDcommenter
+filetype plugin on
 
 " having Ex mode start or showing me the command history
 " is a complete pain in the ass if i mistype
@@ -135,46 +125,13 @@ command W w
 " quick timestamp-as-comment command
 command DS r!echo -n "\# " ; date
 
-" turn off hilighting for CDATA
-hi def link xmlCdata NONE
-
-" no blinking of the cursor in the gui, thanks
-if has("gui_running")
-    set guicursor+=a:blinkon0
-endif
-
-" make sure colored syntax mode is on
-"if has("terminfo")
-"  set t_Co=256
-"  set t_Sf=[3%p1%dm
-"  set t_Sb=[4%p1%dm
-"else
-"  set t_Co=8
-"  set t_Sf=[3%dm
-"  set t_Sb=[4%dm
-"endif
-
 syntax on
-let g:solarized_termcolors = &t_Co
-let g:solarized_termtrans = 1
-let g:solarized_hitrail = 1
 set background=dark
 colorscheme solarized
+call togglebg#map("<F5>") " solarized toggle background
 
 " Turn numbers on for some file types
 au BufRead,BufNewFile *.scala,*.java,*.c,*.m set number
-
-" Change the global default comment colors
-" They needs more contrast with white-on-black
-hi Comment term=italic ctermfg=cyan guifg=#80A0FF gui=bold
-
-" Increase contrast on special character. They're usually bad!
-"hi SpecialKey term=bold ctermbg=red ctermfg=white guibg=#FF0000 guifg=#000000 gui=bold
-
-" Syntax highlighting for the cursor line
-hi clear CursorLine " Remove default underline style
-" Black is perfect on the #181818 background of Mac Terminal :)
-hi CursorLine term=NONE ctermbg=black guibg=#FFFFFF
 
 " Keyboard mapping for cursor keys
 " [works for XTerminals - 970818]
