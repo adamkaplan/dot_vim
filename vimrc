@@ -127,6 +127,7 @@ command DS r!echo -n "\# " ; date
 
 syntax on
 set background=dark
+let g:solarized_termcolors=16
 colorscheme solarized
 call togglebg#map("<F5>") " solarized toggle background
 
